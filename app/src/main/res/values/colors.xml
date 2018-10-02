@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#375811</color>
+
+    <drawable name="depress_bt">#00000000</drawable>
+    <drawable name="press_bt">#b5b5b5</drawable>
+
+    <color name="gray">#c5c5c5</color>
+    <color name="black_gray">#cc808080</color>
+    <color name="short_gray">#dfdfdf</color>
+    <color name="green">#90C652</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+
+
+</resources>

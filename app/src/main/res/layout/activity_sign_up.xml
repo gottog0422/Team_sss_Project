@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/id"
+            android:textSize="20sp" />
+
+        <EditText
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:id="@+id/et_signUp_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/green"
+            android:maxLines="1"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_notice_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/pw"
+            android:textSize="20sp" />
+
+        <EditText
+            android:imeOptions="actionNext"
+            android:id="@+id/et_signUp_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/green"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_notice_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/pw2"
+            android:textSize="20sp" />
+
+        <EditText
+            android:imeOptions="actionNext"
+            android:id="@+id/et_signUp_pw2"
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/green"
+            android:maxLines="1"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_notice_pw2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/nick"
+            android:textSize="20sp" />
+
+        <EditText
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:id="@+id/et_signUp_nick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/green"
+            android:maxLines="1"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_notice_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_signUp_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/ll"
+        android:text="@string/sign_ok" />
+
+    <Button
+        android:id="@+id/bt_signUp_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll"
+        android:text="@string/back" />
+
+</RelativeLayout>

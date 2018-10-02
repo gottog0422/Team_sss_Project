@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@+id/iv_preview"
+        android:gravity="center_vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="제목"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/writer_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="닉네임" />
+
+            <TextView
+                android:id="@+id/mdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="날자" />
+
+            <ImageView
+                android:layout_marginEnd="5dp"
+                android:id="@+id/iv_show"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_show" />
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="본숫자" />
+
+            <ImageView
+                android:layout_marginEnd="5dp"
+                android:id="@+id/iv_thumb"
+                android:layout_width="18dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_thumb" />
+
+            <TextView
+                android:id="@+id/hit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="따봉" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_preview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/rl_commentbox"
+        android:background="@color/gray"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_commentbox"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/short_gray"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="0"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_comment_count"
+            android:layout_centerHorizontal="true"
+            android:text="댓글"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
