@@ -27,7 +27,6 @@ public class SignUpActivity extends AppCompatActivity {
     boolean c_pw2 = false;
     boolean c_nick = false;
 
-    //find view
     @BindView(R.id.bt_signUp_back)
     Button bt_signUp_back;
     @BindView(R.id.bt_signUp_ok)
@@ -54,8 +53,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-
-
     }
 
     @OnFocusChange(R.id.et_signUp_id)
@@ -86,22 +83,29 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.bt_signUp_back)
+    public void back() {
+        onBackPressed();
+    }
+
     @OnClick(R.id.bt_signUp_ok)
     public void onclick_signUp_ok() {
+        //가입 완료 버튼 클릭시 edit text 요구사항 체크
         check_id();
         check_pw();
         check_pw2();
         check_nick();
 
-        if (c_id && c_pw && c_pw2) {
+        //체크 완료시 서버 request
+        if (c_id && c_pw && c_pw2 && c_nick) {
             final String id = et_signUp_id.getText().toString();
             final String pw = et_signUp_pw.getText().toString();
             final String nick = et_signUp_nick.getText().toString();
-
             Call<ArrayList<Integer>> observ = RetrofitService.getInstance().getRetrofitRequest().checkoverlap(id, nick);
             observ.enqueue(new Callback<ArrayList<Integer>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+                    //Json response (id,nick 중복검사)
                     ArrayList<Integer> check = response.body();
 
                     if (check.get(0) > 0) {
@@ -113,10 +117,12 @@ public class SignUpActivity extends AppCompatActivity {
                         tv_notice_nick.setText("중복된 닉네임입니다");
                     }
 
+                    //모든 요구 사항 충족시 가입
                     if (check.get(0) == 0 && check.get(1) == 0) {
                         signUp_ok(id, pw, nick);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
 
@@ -195,8 +201,10 @@ public class SignUpActivity extends AppCompatActivity {
             if (nick.length() < 2 || nick.length() > 10 || !nick.matches("[0-9|a-z|A-Z|가-힣|]*")) {
                 tv_notice_nick.setTextColor(Color.RED);
                 tv_notice_nick.setText("2~10자 한글, 영문 대 소문자, 숫자를 사용하세요");
+                Log.d("ksg", "1");
             } else {
                 tv_notice_nick.setText("");
+                Log.d("ksg", "2");
                 c_nick = true;
             }
         }
@@ -208,7 +216,7 @@ public class SignUpActivity extends AppCompatActivity {
         observ.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     finish();
                 }
             }

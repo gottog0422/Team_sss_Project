@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,7 +15,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,17 +24,14 @@ import com.example.sss.team_project.adapter.WriteContentAdapter;
 import com.example.sss.team_project.model.DetailContent;
 import com.example.sss.team_project.model.WriteContent;
 import com.example.sss.team_project.retrofit.RetrofitService;
-import com.example.sss.team_project.utills.FileUtils;
 import com.example.sss.team_project.utills.PreferenceUtil;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +39,6 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -337,8 +331,8 @@ public class WriteBoardActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case 1000: {
+                //앨범에서 선택
                 imgUri = data.getData();
-
                 WriteContent item = new WriteContent();
                 item.setItem_str(null);
                 item.setItem_iv(imgUri);
@@ -349,7 +343,7 @@ public class WriteBoardActivity extends AppCompatActivity {
             }
 
             case 2000: {
-
+                //사진 촬영 후 가져오기
                 WriteContent item = new WriteContent();
                 item.setItem_str(null);
                 item.setItem_iv(imgUri);

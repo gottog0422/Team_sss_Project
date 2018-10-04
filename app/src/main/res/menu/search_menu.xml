@@ -8,7 +8,7 @@
         android:id="@+id/search_s"
         android:title="@string/search_s" />
 
-    <item
-        android:id="@+id/search_i"
-        android:title="@string/search_i" />
+    <!--<item-->
+        <!--android:id="@+id/search_i"-->
+        <!--android:title="@string/search_i" />-->
 </menu>

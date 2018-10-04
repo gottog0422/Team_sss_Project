@@ -95,13 +95,14 @@ public class BoardActivity extends AppCompatActivity {
         mDate = new Date(mNow);
         final String date = mFormat.format(mDate);
 
-
+        //게시판 타입(카테고리) 받기
         type = getIntent().getIntExtra("type", 0);
         set_header_Title();
 
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         lv_board.addFooterView(mInflater.inflate(R.layout.board_footer, null));
 
+        //페이징 처리 (footer)
         lv_board.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
@@ -272,9 +273,9 @@ public class BoardActivity extends AppCompatActivity {
                     case R.id.search_s:
                         search_type = 1;
                         break;
-                    case R.id.search_i:
-                        search_type = 2;
-                        break;
+//                    case R.id.search_i:
+//                        search_type = 2;
+//                        break;
                 }
                 return false;
             }

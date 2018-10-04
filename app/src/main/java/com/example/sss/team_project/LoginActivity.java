@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText et_login_pw;
     @BindView(R.id.bt_login)
     Button bt_login;
+    @BindView(R.id.bt_signUp)
+    Button bt_signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         final String member_id = et_login_id.getText().toString();
         String member_pw = et_login_pw.getText().toString();
 
+        //Login 버튼 클릭시 server request ID PW 확인
         Call<Boolean> observ = RetrofitService.getInstance().getRetrofitRequest().login(member_id, member_pw);
         observ.enqueue(new Callback<Boolean>() {
             @Override
@@ -45,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Boolean login_suc = response.body();
                     if (login_suc) {
+                        //로그인 성공 시 전역 preference ID값 저장 (자동로그인)
                         PreferenceUtil.getInstance(LoginActivity.this).putStringExtra("id", member_id);
 
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -64,9 +68,12 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("ksg", "서버연결실패");
             }
         });
-
-
     }
 
+    @OnClick(R.id.bt_signUp)
+    public void go_signUp() {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
 
+    }
 }

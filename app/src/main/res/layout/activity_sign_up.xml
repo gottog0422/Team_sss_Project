@@ -4,12 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".SignUpActivity">
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_title" />
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="vertical">
@@ -22,14 +30,14 @@
             android:textSize="20sp" />
 
         <EditText
-            android:inputType="text"
-            android:imeOptions="actionNext"
             android:id="@+id/et_signUp_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@color/green"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:maxLines="1"
             android:textSize="30sp" />
 
@@ -47,13 +55,13 @@
             android:textSize="20sp" />
 
         <EditText
-            android:imeOptions="actionNext"
             android:id="@+id/et_signUp_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@color/green"
+            android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:maxLines="1"
             android:textSize="30sp" />
@@ -72,14 +80,14 @@
             android:textSize="20sp" />
 
         <EditText
-            android:imeOptions="actionNext"
             android:id="@+id/et_signUp_pw2"
             android:layout_width="match_parent"
-            android:inputType="textPassword"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@color/green"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:textSize="30sp" />
 
@@ -97,14 +105,14 @@
             android:textSize="20sp" />
 
         <EditText
-            android:inputType="text"
-            android:imeOptions="actionDone"
             android:id="@+id/et_signUp_nick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@color/green"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:maxLines="1"
             android:textSize="30sp" />
 
@@ -115,19 +123,25 @@
             android:layout_marginStart="30dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/bt_signUp_ok"
+    <LinearLayout
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_below="@id/ll"
-        android:text="@string/sign_ok" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/bt_signUp_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll"
-        android:text="@string/back" />
+        <Button
+            android:id="@+id/bt_signUp_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back" />
+
+        <Button
+            android:id="@+id/bt_signUp_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_ok" />
+
+    </LinearLayout>
 
 </RelativeLayout>

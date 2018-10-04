@@ -20,14 +20,8 @@ public class Logo extends AppCompatActivity {
             public void run() {
                 String value = PreferenceUtil.getInstance(Logo.this).getStringExtra("id");
 
-//                Intent intent = new Intent(Logo.this, HomeActivity.class);
-//                startActivity(intent);
-//                Logo.this.overridePendingTransition(R.anim.anim_right_in, R.anim.anim_not_move);
-//                finish();
-
-
                 if (value == null || value.equals("")) {
-                    Intent intent = new Intent(Logo.this, LoginChoiceActivity.class);
+                    Intent intent = new Intent(Logo.this, LoginActivity.class);
                     startActivity(intent);
                     Logo.this.overridePendingTransition(R.anim.anim_right_in, R.anim.anim_not_move);
                     finish();

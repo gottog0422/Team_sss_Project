@@ -89,6 +89,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void get_Message() {
+        //버튼 비활성
         unbt();
         items.clear();
         Call<ArrayList<MessageFile>> observ = RetrofitService.getInstance().getRetrofitRequest().getMessage(id, type);
@@ -99,6 +100,7 @@ public class MessageActivity extends AppCompatActivity {
                     items.addAll(response.body());
 
                     messageAdapter.notifyDataSetChanged();
+                    //서버에서 데이터 response 후 다시 활성
                     bt();
                 }
             }

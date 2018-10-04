@@ -124,7 +124,21 @@ public class HomeActivity extends AppCompatActivity {
         setMemberInfo(id);
         setRankBoard();
         getHomePic();
+    }
 
+    public void setWeather() {
+        SharedPreferences pref = getSharedPreferences("weather", MODE_PRIVATE);
+        String lon = pref.getString("lon", "");
+        String lat = pref.getString("lat", "");
+
+        if (lon.equals("") && lat.equals("")) {
+            tv_weather_info1.setText("날씨 정보를 받기위해\n위치를 갱신해주세요!");
+        } else {
+            String api_key = "a3d6e9a73ea038bfe441a78a954e9f77";
+            WeatherTask jason = new WeatherTask();
+
+            jason.execute("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + api_key);
+        }
     }
 
     public class WeatherTask extends AsyncTask<String, Integer, String> {
@@ -156,20 +170,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void setWeather() {
-        SharedPreferences pref = getSharedPreferences("weather", MODE_PRIVATE);
-        String lon = pref.getString("lon", "");
-        String lat = pref.getString("lat", "");
-
-        if (lon.equals("") && lat.equals("")) {
-            tv_weather_info1.setText("날씨 정보를 받기위해\n위치를 갱신해주세요!");
-        } else {
-            String api_key = "a3d6e9a73ea038bfe441a78a954e9f77";
-            WeatherTask jason = new WeatherTask();
-
-            jason.execute("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + api_key);
-        }
-    }
 
     public void setRankBoard() {
         long mNow = System.currentTimeMillis();
@@ -241,6 +241,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void getHomePic() {
+        //사진 게시판의 최신 게시글 3개 request
         Call<ArrayList<String>> observ = RetrofitService.getInstance().getRetrofitRequest().getHomePic();
         observ.enqueue(new Callback<ArrayList<String>>() {
             @Override
@@ -248,23 +249,27 @@ public class HomeActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ArrayList<String> picitem = response.body();
                     String url = "http://10.0.2.2:8090/sss/resources/upload/";
-                    if (!picitem.get(0).equals("null")) {
+
+                    if (picitem.size() > 0 && !picitem.get(0).equals("null")) {
+                        //Glide(open source)를 이용한 url Image load
+                        Log.d("ksg", "dd");
                         GlideApp.with(HomeActivity.this)
                                 .load(url + picitem.get(0)).centerCrop()
                                 .into(iv_0);
                     }
-                    if (!picitem.get(1).equals("null")) {
+                    if (picitem.size() > 1 && !picitem.get(1).equals("null")) {
                         GlideApp.with(HomeActivity.this)
                                 .load(url + picitem.get(1)).centerCrop()
                                 .into(iv_1);
                     }
-                    if (!picitem.get(2).equals("null")) {
+                    if (picitem.size() > 2 &&!picitem.get(2).equals("null")) {
                         GlideApp.with(HomeActivity.this)
                                 .load(url + picitem.get(2)).centerCrop()
                                 .into(iv_2);
                     }
                 }
             }
+
 
             @Override
             public void onFailure(Call<ArrayList<String>> call, Throwable t) {
@@ -285,7 +290,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PreferenceUtil.getInstance(HomeActivity.this).removePreference("id");
-                        Intent intent = new Intent(HomeActivity.this, LoginChoiceActivity.class);
+                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -356,13 +361,15 @@ public class HomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_weather_refresh)
     public void weather_refresh() {
+        //gps 이용하여 위도, 경도 얻기
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         PermissionListener permissionlistener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
-
+                //GPS 활성 여부 확인
                 if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) && !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    //비활성 시 ANDROID GPS setting Intent
                     Toast.makeText(HomeActivity.this, "기기 위치 기능을 사용 설정하세요", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -370,13 +377,12 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     try {
+                        //활성시
                         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, mLocationListener);
                         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 1, mLocationListener);
                     } catch (SecurityException ex) {
-
                     }
                 }
-
             }
 
             @Override
@@ -393,6 +399,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private final LocationListener mLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
+            //위치 변경시 시작되는 함수
             double lon = location.getLongitude(); //경도
             double lat = location.getLatitude();   //위도
 
@@ -403,6 +410,7 @@ public class HomeActivity extends AppCompatActivity {
             editor.putString("lat", lat + "");
             editor.commit();
 
+            //위도, 경도를 이용하여 API 날씨 정보 얻어오기
             setWeather();
             Toast.makeText(HomeActivity.this, "갱신 되었습니다!", Toast.LENGTH_SHORT).show();
 
